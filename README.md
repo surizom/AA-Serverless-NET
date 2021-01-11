@@ -33,7 +33,7 @@ Comme tout langage moderne, .NET bénéficie d'une communauté de développeurs 
 Nous allons maintenant utiliser la librairie [ImageSharp](https://github.com/SixLabors/ImageSharp).
 
 1. Toujours sur le même projet, ajoutez le package **SixLabors.ImageSharp**
-2. En vous basant sur [ces exemples](https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html), redimensionnez une image (ou effectuez une autre transformation!) et sauvegardez la. Pour préciser des noms de chemin Windows, je vous conseille la syntaxe **@"c:\chemin\monimage.jpeg"**
+2. En vous basant sur [ces exemples](https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html), redimensionnez une image (ou effectuez une autre transformation!) et sauvegardez la. Pour préciser des noms de chemin Windows, je vous conseille la syntaxe **@"c:\chemin\monimage.jpeg"** qui permet de garder lisibles les backslashes
 3. (optionnel avancé) La gestion du parallélisme et de l'asynchrone est un point fort de .NET. Utilisez **Parallel.ForEach** pour redimensionner plusieurs images en parallèle.
 
 ### Portage vers une Azure Function
