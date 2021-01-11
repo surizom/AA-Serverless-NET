@@ -8,13 +8,18 @@
 
 ### Hello World!
 1. Suivre les [instructions officielles](https://docs.microsoft.com/en-us/dotnet/core/get-started) pour créer votre premier programme en .NET
-2. Naviguez vers le dossier *sample1* et modifiez le programme en y ajoutant une classe *Personne* avec:
+2. Naviguez vers le dossier *sample1* et modifiez le programme en y ajoutant une classe *Personne* avec (Testez le snippet *prop* puis la touche *TAB* ):
     1. Une propriété **nom** de type *string*
     2. Une propriété **age** de type *int*
     3. (optionnel) Une méthode **Hello(bool isLowercase)** qui renvoit **"hello *name*, you are *age*** si **isLowercase** vaut *true*, ou la même chaîne mais en majuscule sinon.
     4. Créez une variable de type *Personne* en lui assignant un nom et un âge ([docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/instance-constructors))
-    5. Affichez à l'écran **"hello *name*, you are *age*** (au lieu du *Hello World!* d'origine)
+    5. Affichez à l'écran **hello *name*, you are *age*** (au lieu du *Hello World!* d'origine)
 
+Pour recompiler et exécuter votre code, depuis le dossier du projet:
+> dotnet run
+
+Pour recompiler uniquement
+> dotnet build
 
 ### NuGet packages
 Comme tout langage moderne, .NET bénéficie d'une communauté de développeurs partageant des librairies prêtes à l'emploi, en l'occurence [NuGet](https://nuget.org). Dans cette exercice nous allons utiliser la librairie la plus populaire de NuGet: **newtonsoft.json** qui permet de facilement travailler avec des données au format json.
@@ -28,7 +33,7 @@ Comme tout langage moderne, .NET bénéficie d'une communauté de développeurs 
 Nous allons maintenant utiliser la librairie [ImageSharp](https://github.com/SixLabors/ImageSharp).
 
 1. Toujours sur le même projet, ajoutez le package **SixLabors.ImageSharp**
-2. En vous basant sur [ces exemples](https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html), redimensionnez une image (ou effectuez une autre transformation!)  et sauvegardez la.
+2. En vous basant sur [ces exemples](https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html), redimensionnez une image (ou effectuez une autre transformation!) et sauvegardez la. Pour préciser des noms de chemin Windows, je vous conseille la syntaxe **@"c:\chemin\monimage.jpeg"**
 3. (optionnel avancé) La gestion du parallélisme et de l'asynchrone est un point fort de .NET. Utilisez **Parallel.ForEach** pour redimensionner plusieurs images en parallèle.
 
 ### Portage vers une Azure Function
