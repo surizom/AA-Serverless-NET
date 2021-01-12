@@ -6,7 +6,7 @@
     - [Visual Studio Code](https://code.visualstudio.com/)
     - [Azure Functions extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 
-### Hello World!
+### 1. Hello World!
 1. Suivre les [instructions officielles](https://docs.microsoft.com/en-us/dotnet/core/get-started) pour créer votre premier programme en .NET
 2. Naviguez vers le dossier *sample1* et modifiez le programme en y ajoutant une classe *Personne* avec (Testez le snippet *prop* puis la touche *TAB* ):
     1. Une propriété **nom** de type *string*
@@ -21,7 +21,7 @@ Pour recompiler et exécuter votre code, depuis le dossier du projet:
 Pour recompiler uniquement
 > dotnet build
 
-### NuGet packages
+### 2. NuGet packages
 Comme tout langage moderne, .NET bénéficie d'une communauté de développeurs partageant des librairies prêtes à l'emploi, en l'occurence [NuGet](https://nuget.org). Dans cette exercice nous allons utiliser la librairie la plus populaire de NuGet: **newtonsoft.json** qui permet de facilement travailler avec des données au format json.
 
 1. Toujours sur la base du programme Hello World, installez le package **newtonsoft.json** en exécutant la commande *dotnet add package Newtonsoft.Json* depuis le dossier *sample1*
@@ -29,14 +29,14 @@ Comme tout langage moderne, .NET bénéficie d'une communauté de développeurs 
 3. (optionnel) Formattez la sérialisation précédente en utilisant un **Formatting==Indented**
 4. Affichez le json à l'écran à la place du texte précédemment présent
 
-### Traitement d'image locale
+### 3. Traitement d'image locale
 Nous allons maintenant utiliser le package [ImageSharp](https://github.com/SixLabors/ImageSharp).
 
 1. Toujours sur le même projet, ajoutez le package **SixLabors.ImageSharp**
 2. En vous basant sur [ces exemples](https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html), redimensionnez une image (ou effectuez une autre transformation!) et sauvegardez la. Pour préciser des noms de chemin Windows, je vous conseille la syntaxe **@"c:\chemin\monimage.jpeg"** qui permet de garder lisibles les backslashes
 3. (optionnel avancé) La gestion du parallélisme et de l'asynchrone est un point fort de .NET. Utilisez **Parallel.ForEach** pour redimensionner plusieurs images en parallèle.
 
-### Portage vers une Azure Function
+### 4. Portage vers une Azure Function
 Nous allons maintenant porter ce petit programme pour pouvoir l'héberger au sein d'une Azure Function. Elle se déclenchera sur un appel [HttpTrigger](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=csharp) en POST.
 
 1. Créez un nouveau dossier local *ResizeFunction*
