@@ -19,7 +19,7 @@ namespace sample1
                     Console.WriteLine("Retaillage...");
                     image.Mutate(x => x.Resize(image.Width / 10, image.Height / 10)); 
                     // Pour la démo nous ne sauvegarderons pas pour éviter les verrouillages                
-                    // image.Save(@"c:\temp\bar.jpg"); 
+                    // image.SaveAsJpeg(@"c:\temp\bar.jpg"); 
                     Console.WriteLine("Fin du retaillage...");
                 }
             });

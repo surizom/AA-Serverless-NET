@@ -30,7 +30,7 @@ Comme tout langage moderne, .NET bénéficie d'une communauté de développeurs 
 4. Affichez le json à l'écran à la place du texte précédemment présent
 
 ### Traitement d'image locale
-Nous allons maintenant utiliser la librairie [ImageSharp](https://github.com/SixLabors/ImageSharp).
+Nous allons maintenant utiliser le package [ImageSharp](https://github.com/SixLabors/ImageSharp).
 
 1. Toujours sur le même projet, ajoutez le package **SixLabors.ImageSharp**
 2. En vous basant sur [ces exemples](https://docs.sixlabors.com/articles/imagesharp/gettingstarted.html), redimensionnez une image (ou effectuez une autre transformation!) et sauvegardez la. Pour préciser des noms de chemin Windows, je vous conseille la syntaxe **@"c:\chemin\monimage.jpeg"** qui permet de garder lisibles les backslashes
@@ -39,8 +39,27 @@ Nous allons maintenant utiliser la librairie [ImageSharp](https://github.com/Six
 ### Portage vers une Azure Function
 Nous allons maintenant porter ce petit programme pour pouvoir l'héberger au sein d'une Azure Function. Elle se déclenchera sur un appel [HttpTrigger](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=csharp) en POST.
 
-1. Retournez à la page d'accueil du portail et créez une Function App (ex: lucvovan-fa) ciblant *.NET Core 3.1*, peu importe la localisation, laissez Azure créer un nouveau Storage Account pour héberger le code de la fonction, et sélectionnez un hosting *Consumption*.
-2. [Créez un nouveau projet Azure Functions depuis Visual Studio Code](https://docs.microsoft.com/fr-fr/azure/azure-functions/create-first-function-vs-code-csharp) en faisant bien attention de sélectionner **Http Trigger**
-3. Portez votre code de redimensionnement en utilisant le **Stream** en provenance du blob à la place du nom de fichier
-4. Déployez votre code et appelez fonction avec curl () ou via un testeur de web service comme [Postman](https://www.postman.com/downloads/).
-5. (optionnel) Ajoutez deux paramères GET à votre fonction afin que l'utilisateur puisse choisir les dimensions cibles.
+1. Créez un nouveau dossier local *ResizeFunction*
+2. Retournez à la page d'accueil du portail
+    - Créez une Function App (ex: lucvovan-fa)
+    - Ciblant *.NET Core 3.1*
+    - Peu importe la localisation
+    - Laissez Azure créer un nouveau Storage Account pour héberger le code de la fonction
+    - Sélectionnez un hosting *Consumption*
+3. Dans l'onglet Azure, section *FUNCTIONS* [créez un nouveau projet Azure Functions depuis Visual Studio Code](https://docs.microsoft.com/fr-fr/azure/azure-functions/create-first-function-vs-code-csharp)
+    - Dans le dossier *ResizeFunction*
+    - Choisissez *C#*
+    - Faites bien attention de sélectionner **HttpTrigger** (quelques secondes sont nécessaires à l'affichage)
+    - Sélectionnez *Anonymous* comme type d'authentification
+    - Nommez votre fonction **ResizeHttpTrigger**
+3. Depuis le dossier *ResizeFunction*, ajoutez le package [ImageSharp](https://github.com/SixLabors/ImageSharp).
+4. Dans le fichier *.vscode/settings.json*, modifiez **~2** en **~3** (le template n'étant pas à jour au 12/01/2021)
+4. Ouvrez le fichier *ResizeHttpTrigger.cs* et collez le contenu du [fichier préparé](XXX)
+5. Modifiez la signature pour n'accepter que les appels en **POST**
+4. Récupérez les paramètre **w** et **h** de la requête et utilisez les respectivement comme dimensions cibles pour les largeurs et hauteur de la nouvelle image
+5. Récupérez l'adresse de votre fonction depuis le portail Azure en allant sur votre Azure Function, dans la section **Functions**, sélectionnez **ResizeHttpTrigger** et cliquez sur le bouton *Get Function Url* en haut de la page
+5. Déployez votre code et appelez fonction avec curl () ou via un testeur de web service comme [Postman](https://www.postman.com/downloads/).
+
+> curl -d "@~/myimage.jpeg" -X POST http://localhost:3000/data
+
+6. (optionnel) Ajoutez deux paramères GET à votre fonction afin que l'utilisateur puisse choisir les dimensions cibles.

@@ -21,7 +21,7 @@ namespace sample1
                 // The library automatically picks an encoder based on the file extension then
                 // encodes and write the data to disk.
                 // You can optionally set the encoder to choose.
-                image.Save(@"c:\temp\bar.jpg"); 
+                image.SaveAsJpeg(@"c:\temp\bar.jpg"); 
             } // Dispose - releasing memory into a memory pool ready for the next image you wish to process.
         }
     }
