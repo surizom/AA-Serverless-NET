@@ -46,20 +46,23 @@ Nous allons maintenant porter ce petit programme pour pouvoir l'héberger au sei
     - Peu importe la localisation
     - Laissez Azure créer un nouveau Storage Account pour héberger le code de la fonction
     - Sélectionnez un hosting *Consumption*
-3. Dans l'onglet Azure, section *FUNCTIONS* [créez un nouveau projet Azure Functions depuis Visual Studio Code](https://docs.microsoft.com/fr-fr/azure/azure-functions/create-first-function-vs-code-csharp)
+3. Dans l'onglet Azure de Visual Studio Code, section *FUNCTIONS* [créez un nouveau projet Azure Functions depuis Visual Studio Code](https://docs.microsoft.com/fr-fr/azure/azure-functions/create-first-function-vs-code-csharp)
     - Dans le dossier *ResizeFunction*
     - Choisissez *C#*
     - Faites bien attention de sélectionner **HttpTrigger** (quelques secondes sont nécessaires à l'affichage)
     - Sélectionnez *Anonymous* comme type d'authentification
     - Nommez votre fonction **ResizeHttpTrigger**
-3. Depuis le dossier *ResizeFunction*, ajoutez le package [ImageSharp](https://github.com/SixLabors/ImageSharp).
-4. Dans le fichier *.vscode/settings.json*, modifiez **~2** en **~3** (le template n'étant pas à jour au 12/01/2021)
-4. Ouvrez le fichier *ResizeHttpTrigger.cs* et collez le contenu du [fichier préparé](XXX)
-5. Modifiez la signature pour n'accepter que les appels en **POST**
-4. Récupérez les paramètre **w** et **h** de la requête et utilisez les respectivement comme dimensions cibles pour les largeurs et hauteur de la nouvelle image
-5. Récupérez l'adresse de votre fonction depuis le portail Azure en allant sur votre Azure Function, dans la section **Functions**, sélectionnez **ResizeHttpTrigger** et cliquez sur le bouton *Get Function Url* en haut de la page
-5. Déployez votre code et appelez fonction avec curl () ou via un testeur de web service comme [Postman](https://www.postman.com/downloads/).
+4. Depuis le dossier *ResizeFunction*, ajoutez le package [ImageSharp](https://github.com/SixLabors/ImageSharp).
+5. Dans le fichier *.vscode/settings.json*, modifiez **~2** en **~3** (le template n'étant pas à jour au 12/01/2021)
+6. Ouvrez le fichier *ResizeHttpTrigger.cs* et collez le contenu du [fichier préparé](https://github.com/lvovan/AA-Serverless-NET/blob/master/ResizeHttpTrigger-incomplete.cs)
+7. Complétez les différents TODO
+    - Récupérez les paramètres **w** et **h** de la requête avec **req.Query[*key*]** et utilisez les respectivement comme dimensions cibles pour les largeurs et hauteur de la nouvelle image. Attention au typage!
+    - Les MIME types sont documentés [ici](https://docs.w3cub.com/http/basics_of_http/mime_types/complete_list_of_mime_types.html)
 
-> curl -d "@~/myimage.jpeg" -X POST http://localhost:3000/data
 
-6. (optionnel) Ajoutez deux paramères GET à votre fonction afin que l'utilisateur puisse choisir les dimensions cibles.
+Récupérez l'adresse de votre fonction depuis le portail Azure en allant sur votre Azure Function, dans la section **Functions**, sélectionnez **ResizeHttpTrigger** et cliquez sur le bouton *Get Function Url* en haut de la page
+8. Déployez votre code et appelez fonction avec curl () ou via un testeur de web service comme [Postman](https://www.postman.com/downloads/).
+
+> curl --data-binary "@chaussures_abimees.jpg" -X POST "https://votrefonction.azurewebsites.net/api/ResizeHttpTrigger?w=100&h=100" -v > output.jpeg
+
+9. (optionnel) Changez **AuthorizationLevel.Anonymous** à **AuthorizationLevel.Function** puis récupérez la clé d'API de votre fonction sur le portail. Modifiez ensuite votre requête pour qu'elle s'authentifie avec succès. 
